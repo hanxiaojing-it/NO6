@@ -271,6 +271,35 @@ INSERT INTO `jiuzhentongzhi` VALUES (1,'2025-03-27 07:44:24','1111111111','医�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tongzhijilu`
+--
+
+DROP TABLE IF EXISTS `tongzhijilu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tongzhijilu` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `yuyuebianhao` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '预约编号',
+  `yishengzhanghao` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '医生账号',
+  `zhanghao` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户账号',
+  `tongzhileixing` int(11) DEFAULT NULL COMMENT '通知类型（1-预约成功通知 2-就诊前一天提醒 3-就诊当天提醒）',
+  `tongzhineirong` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '通知内容',
+  `fasongshijian` datetime DEFAULT NULL COMMENT '发送时间',
+  `fasongzhuangtai` int(11) DEFAULT '0' COMMENT '发送状态（0-待发送 1-发送成功 2-发送失败）',
+  `jieshouzhuangtai` int(11) DEFAULT '0' COMMENT '接收状态（0-未接收 1-已接收 2-已读）',
+  `shibaiyuanyin` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '失败原因',
+  `chongshicishu` int(11) DEFAULT '0' COMMENT '重试次数',
+  `jiuzhenshijian` datetime DEFAULT NULL COMMENT '就诊时间',
+  `jihuafasongshijian` datetime DEFAULT NULL COMMENT '计划发送时间',
+  PRIMARY KEY (`id`),
+  KEY `yuyuebianhao` (`yuyuebianhao`),
+  KEY `fasongzhuangtai` (`fasongzhuangtai`),
+  KEY `zhanghao` (`zhanghao`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='通知记录';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `menu`
 --
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cl.dao.TongzhijiluDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.cl.entity.TongzhijiluEntity" id="tongzhijiluMap">
+        <result property="id" column="id"/>
+        <result property="yuyuebianhao" column="yuyuebianhao"/>
+        <result property="yishengzhanghao" column="yishengzhanghao"/>
+        <result property="zhanghao" column="zhanghao"/>
+        <result property="tongzhileixing" column="tongzhileixing"/>
+        <result property="tongzhineirong" column="tongzhineirong"/>
+        <result property="fasongshijian" column="fasongshijian"/>
+        <result property="fasongzhuangtai" column="fasongzhuangtai"/>
+        <result property="jieshouzhuangtai" column="jieshouzhuangtai"/>
+        <result property="shibaiyuanyin" column="shibaiyuanyin"/>
+        <result property="chongshicishu" column="chongshicishu"/>
+        <result property="jiuzhenshijian" column="jiuzhenshijian"/>
+        <result property="jihuafasongshijian" column="jihuafasongshijian"/>
+        <result property="addtime" column="addtime"/>
+    </resultMap>
+
+    <select id="selectListView"
+        resultType="com.cl.entity.view.TongzhijiluView" >
+        SELECT * FROM tongzhijilu ${ew.customSqlSegment}
+    </select>
+
+    <select id="selectListView"
+        resultType="com.cl.entity.view.TongzhijiluView" >
+        SELECT * FROM tongzhijilu
+        <where>
+            1=1 ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <select id="selectView"
+        resultType="com.cl.entity.view.TongzhijiluView" >
+        SELECT * FROM tongzhijilu ${ew.customSqlSegment}
+    </select>
+
+    <select id="selectByFasongzhuangtai" resultType="com.cl.entity.TongzhijiluEntity">
+        SELECT * FROM tongzhijilu WHERE fasongzhuangtai = #{fasongzhuangtai}
+    </select>
+
+    <select id="selectByYuyuebianhao" resultType="com.cl.entity.TongzhijiluEntity">
+        SELECT * FROM tongzhijilu WHERE yuyuebianhao = #{yuyuebianhao}
+    </select>
+
+</mapper>
