@@ -28,6 +28,7 @@ import com.cl.entity.YishengyuyueEntity;
 import com.cl.entity.view.YishengyuyueView;
 
 import com.cl.service.YishengyuyueService;
+import com.cl.service.TongzhijiluService;
 import com.cl.service.TokenService;
 import com.cl.utils.PageUtils;
 import com.cl.utils.R;
@@ -47,6 +48,8 @@ import com.cl.utils.CommonUtil;
 public class YishengyuyueController {
     @Autowired
     private YishengyuyueService yishengyuyueService;
+    @Autowired
+    private TongzhijiluService tongzhijiluService;
 
 
 
@@ -187,9 +190,19 @@ public class YishengyuyueController {
         List<YishengyuyueEntity> list = new ArrayList<YishengyuyueEntity>();
         for(Long id : ids) {
             YishengyuyueEntity yishengyuyue = yishengyuyueService.selectById(id);
+            String oldSfsh = yishengyuyue.getSfsh();
             yishengyuyue.setSfsh(sfsh);
             yishengyuyue.setShhf(shhf);
             list.add(yishengyuyue);
+            
+            if ("是".equals(sfsh) && !"是".equals(oldSfsh)) {
+                tongzhijiluService.createNotificationsForAppointment(
+                    yishengyuyue.getYuyuebianhao(),
+                    yishengyuyue.getYishengzhanghao(),
+                    yishengyuyue.getZhanghao(),
+                    yishengyuyue.getYuyueshijian()
+                );
+            }
         }
         yishengyuyueService.updateBatchById(list);
         return R.ok();
